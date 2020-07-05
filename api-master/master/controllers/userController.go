@@ -2,7 +2,6 @@ package controllers
 
 import (
 	"encoding/json"
-	"fmt"
 	"liveCodeAPI/api-master/master/models"
 	"liveCodeAPI/api-master/master/usecases/userusecase"
 	"liveCodeAPI/utils"
@@ -17,6 +16,7 @@ type UserHandler struct {
 
 func UserController(r *mux.Router, service userusecase.UserUsecase) {
 	userHandler := UserHandler{userUseCase: service}
+
 	auth := r.PathPrefix("/auth").Subrouter()
 	auth.HandleFunc("", userHandler.getUser).Methods(http.MethodPost)
 }
@@ -37,6 +37,4 @@ func (u *UserHandler) getUser(w http.ResponseWriter, r *http.Request) {
 	} else {
 		http.Error(w, "Invalid login", http.StatusUnauthorized)
 	}
-
-	fmt.Println(isValid)
 }

@@ -1,7 +1,6 @@
 package transactionusecase
 
 import (
-	"fmt"
 	"liveCodeAPI/api-master/master/models"
 	"liveCodeAPI/api-master/master/repositories/transactionrepository"
 )
@@ -26,7 +25,6 @@ func (t *TransactionUsecaseImpl) GetThisDayTransaction() ([]*models.Transaction,
 	if err != nil {
 		return nil, err
 	}
-	fmt.Println(transactions)
 	return transactions, nil
 }
 func (t *TransactionUsecaseImpl) GetMonthTransaction(data string) ([]*models.Transaction, error) {

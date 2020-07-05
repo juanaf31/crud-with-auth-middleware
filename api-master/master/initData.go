@@ -11,6 +11,7 @@ import (
 	"liveCodeAPI/api-master/master/usecases/productusecase"
 	"liveCodeAPI/api-master/master/usecases/transactionusecase"
 	"liveCodeAPI/api-master/master/usecases/userusecase"
+	"liveCodeAPI/middleware"
 
 	"github.com/gorilla/mux"
 )
@@ -32,4 +33,5 @@ func InitData(r *mux.Router, db *sql.DB) {
 	transactionUsecase := transactionusecase.InitTransactionUsecase(transactionRepo)
 	controllers.TransactionController(r, transactionUsecase)
 
+	r.Use(middleware.ActivityLogMiddleware)
 }

@@ -17,8 +17,6 @@ type ProductHandler struct {
 func ProductController(r *mux.Router, service productusecase.ProductUsecase) {
 	productHandler := ProductHandler{productUseCase: service}
 
-	r.Use(middleware.ActivityLogMiddleware)
-
 	product := r.PathPrefix("/products").Subrouter()
 	product.HandleFunc("", productHandler.listProduct).Methods(http.MethodGet)
 	product.Use(middleware.TokenValidationMiddleware)

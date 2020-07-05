@@ -18,8 +18,6 @@ func CategoryController(r *mux.Router, service categoryusecase.CategoryUsecase) 
 
 	categoryHandler := CategoryHandler{categoryUseCase: service}
 
-	r.Use(middleware.ActivityLogMiddleware)
-
 	category := r.PathPrefix("/category").Subrouter()
 	category.HandleFunc("", categoryHandler.listCategory).Methods(http.MethodGet)
 	category.Use(middleware.TokenValidationMiddleware)
